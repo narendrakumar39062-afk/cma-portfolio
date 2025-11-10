@@ -10,148 +10,416 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 165, 116, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(212, 165, 116, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(212, 165, 116, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(212, 165, 116, 0.6);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
         header {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
             color: white;
             text-align: center;
-            padding: 60px 20px;
-            border-radius: 10px;
-            margin-bottom: 40px;
+            padding: 80px 20px;
+            border-radius: 15px;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(212, 165, 116, 0.15);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            animation: fadeInUp 0.8s ease-out;
         }
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid #d4a574;
-            margin-bottom: 20px;
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
         }
-        h1 {
+
+        header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+            animation: slideInLeft 0.6s ease-out;
         }
+
         .title {
             font-size: 1.2em;
             color: #d4a574;
             margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+            animation: slideInLeft 0.8s ease-out;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(212, 165, 116, 0.2);
         }
+
         .tagline {
             font-size: 1em;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+            color: #b0b0b0;
         }
+
+        header > p:last-of-type {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.2s ease-out;
+            color: #a0a0a0;
+        }
+
         .btn-group {
-            margin-top: 20px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.4s ease-out;
         }
+
         button, a.btn {
-            background-color: #d4a574;
-            color: white;
-            padding: 12px 30px;
+            background: linear-gradient(135deg, #d4a574 0%, #c89558 100%);
+            color: #1a1a1a;
+            padding: 14px 35px;
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
             cursor: pointer;
             margin: 10px;
             text-decoration: none;
             display: inline-block;
             font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 165, 116, 0.3);
+            position: relative;
+            overflow: hidden;
         }
+
+        button::before, a.btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:hover::before, a.btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
         button:hover, a.btn:hover {
-            background-color: #c89558;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.5);
+            background: linear-gradient(135deg, #e0b585 0%, #d4a574 100%);
         }
+
         section {
-            background: white;
-            padding: 30px;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(25, 25, 25, 0.95) 100%);
+            padding: 40px;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out;
+            transition: all 0.3s ease;
         }
+
+        section:hover {
+            border-color: rgba(212, 165, 116, 0.3);
+            box-shadow: 0 12px 48px rgba(212, 165, 116, 0.15);
+        }
+
         h2 {
-            color: #1a1a1a;
-            margin-bottom: 20px;
+            color: #d4a574;
+            margin-bottom: 25px;
             border-bottom: 2px solid #d4a574;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
+            font-size: 1.8em;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 2px 8px rgba(212, 165, 116, 0.2);
         }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d4a574;
+            animation: slideInLeft 0.6s ease-out forwards;
+        }
+
         h3 {
             color: #d4a574;
-            margin-top: 15px;
+            margin-top: 20px;
             margin-bottom: 10px;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
         }
-        .about p {
-            margin-bottom: 15px;
+
+        h3:hover {
+            color: #e0b585;
+            text-shadow: 0 0 10px rgba(212, 165, 116, 0.5);
         }
+
         .experience-item {
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
         }
+
+        .experience-item:hover {
+            padding-left: 15px;
+            border-bottom-color: rgba(212, 165, 116, 0.5);
+        }
+
         .experience-item:last-child {
             border-bottom: none;
         }
+
         .company {
             font-weight: bold;
-            color: #333;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
         }
+
+        .experience-item:hover .company {
+            color: #d4a574;
+            text-shadow: 0 0 10px rgba(212, 165, 116, 0.3);
+        }
+
         .role {
-            color: #666;
+            color: #a0a0a0;
             font-style: italic;
         }
+
         .dates {
-            color: #999;
+            color: #808080;
             font-size: 0.9em;
         }
+
         ul {
             margin-left: 20px;
-            margin-top: 10px;
-        }
-        li {
-            margin-bottom: 8px;
-        }
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
             margin-top: 15px;
         }
-        .skill {
-            background: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
+
+        li {
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            color: #c0c0c0;
         }
+
+        li:hover {
+            color: #d4a574;
+            padding-left: 10px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .skill {
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.1) 0%, rgba(212, 165, 116, 0.05) 100%);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            transition: all 0.3s ease;
+            color: #d4a574;
+            font-weight: 500;
+            cursor: pointer;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .skill:hover {
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.3) 0%, rgba(212, 165, 116, 0.2) 100%);
+            border-color: #d4a574;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(212, 165, 116, 0.3);
+            text-shadow: 0 0 10px rgba(212, 165, 116, 0.6);
+        }
+
         .contact-info {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
+
         .contact-item {
-            padding: 15px;
-            background: #f9f9f9;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.05) 0%, rgba(0, 0, 0, 0.3) 100%);
             border-left: 4px solid #d4a574;
-            border-radius: 5px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 165, 116, 0.1);
+            animation: fadeInUp 0.8s ease-out;
         }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.3);
+            border-left-color: #e0b585;
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%);
+        }
+
+        .contact-item strong {
+            color: #d4a574;
+            display: block;
+            margin-bottom: 8px;
+        }
+
         .contact-item a {
             color: #d4a574;
             text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
+
         .contact-item a:hover {
+            color: #e0b585;
             text-decoration: underline;
+            text-shadow: 0 0 10px rgba(212, 165, 116, 0.5);
         }
+
         footer {
             text-align: center;
-            padding: 20px;
-            color: #666;
-            border-top: 1px solid #ddd;
-            margin-top: 40px;
+            padding: 30px;
+            color: #808080;
+            border-top: 1px solid rgba(212, 165, 116, 0.2);
+            margin-top: 60px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        footer p {
+            margin: 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        footer p:hover {
+            color: #d4a574;
+            text-shadow: 0 0 10px rgba(212, 165, 116, 0.3);
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #d4a574;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 30px rgba(212, 165, 116, 0.5);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 50px 15px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            section {
+                padding: 25px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
         }
     </style>
 </head>
@@ -160,155 +428,5 @@
         <header>
             <h1>CMA Narendra Kumar</h1>
             <p class="title">Cost and Management Accountant | Financial Analysis Expert | AI Consultant</p>
-            <p class="tagline">Transforming Financial Data into Strategic Business Insights</p>
-            <p style="margin-top: 15px;">Specialized in inventory management, financial accounting, stock auditing, and AI-driven business automation.</p>
-            <div class="btn-group">
-                <button onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">View My Projects</button>
-                <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get in Touch</button>
-            </div>
-        </header>
+            <p class="tagline">Transforming Financial Data into
 
-        <section class="about">
-            <h2>About Me</h2>
-            <p>As a qualified Cost and Management Accountant from the Institute of Cost Accountants of India (ICMAI), I bring a unique blend of financial expertise and technological innovation. I successfully passed all three levels of the CMA exam on my first attempt.</p>
-            <p>During my tenure at SURESH Flavours and Extracts, I maintained accurate GST records, managed accounts, prepared budgets and forecasts. My experience extends to Input Tax Credit management, stock audits, and variance analysis.</p>
-            <p>I am passionate about leveraging AI and automation to optimize financial workflows. With expertise in Excel, VBA, SAP FICO, and data analysis, I transform complex financial data into actionable business intelligence.</p>
-        </section>
-
-        <section>
-            <h2>Professional Experience</h2>
-            <div class="experience-item">
-                <h3>Accountant</h3>
-                <p class="company">SURESH FLAVOURS AND EXTRACTS PRIVATE LIMITED</p>
-                <p class="dates">Apr 2023 - Jun 2024 · 1 yr 3 mos</p>
-                <ul>
-                    <li>Maintained accurate GST-related records and invoice management</li>
-                    <li>Managed Input Tax Credit reconciliation with suppliers</li>
-                    <li>Processed AR/AP ensuring timely payments and collections</li>
-                    <li>Prepared budgets and forecasts for strategic planning</li>
-                    <li>Conducted variance analysis and reconciliations</li>
-                    <li>Performed comprehensive stock audits</li>
-                </ul>
-            </div>
-            <div class="experience-item">
-                <h3>Sales Person</h3>
-                <p class="company">Sr novelty and sports</p>
-                <p class="dates">Mar 2017 - Aug 2022 · 5 yrs 6 mos</p>
-                <ul>
-                    <li>Managed daily operations for retail outlet</li>
-                    <li>Analyzed sales trends to optimize inventory</li>
-                    <li>Provided exceptional customer service</li>
-                    <li>Handled financial accounting and transactions</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="projects">
-            <h2>Featured Projects</h2>
-            <div class="experience-item">
-                <h3>📊 Inventory Management Tool</h3>
-                <p class="dates">Oct 2025 - Nov 2025</p>
-                <p>Automated inventory system using Excel VBA with real-time alerts, dynamic reporting, and intuitive UI.</p>
-                <p style="margin-top: 10px;"><strong>Technologies:</strong> Advanced Excel, VBA, Automation</p>
-            </div>
-            <div class="experience-item">
-                <h3>📈 Excel Financial Visualizations</h3>
-                <p class="dates">Sep 2025</p>
-                <p>Dynamic Excel visualizations with interactive dashboards for comprehensive business intelligence.</p>
-                <p style="margin-top: 10px;"><strong>Technologies:</strong> Data Analysis, Excel, Financial Analysis</p>
-            </div>
-        </section>
-
-        <section>
-            <h2>Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill">Advanced Excel</div>
-                <div class="skill">VBA Programming</div>
-                <div class="skill">SAP FICO</div>
-                <div class="skill">Financial Analysis</div>
-                <div class="skill">Data Analysis</div>
-                <div class="skill">Inventory Management</div>
-                <div class="skill">Cost Accounting</div>
-                <div class="skill">GST Compliance</div>
-                <div class="skill">Budgeting</div>
-                <div class="skill">Tally ERP</div>
-                <div class="skill">Zoho</div>
-                <div class="skill">Auditing</div>
-                <div class="skill">AI Consulting</div>
-                <div class="skill">Problem Solving</div>
-                <div class="skill">Business Admin</div>
-            </div>
-        </section>
-
-        <section>
-            <h2>Certifications & Licenses</h2>
-            <div class="experience-item">
-                <h3>🎯 Accenture UK - Strategy Consulting Job Simulation</h3>
-                <p class="dates">Issued Nov 2025</p>
-                <p><strong>Skills:</strong> Business Analysis, Data Analysis</p>
-            </div>
-            <div class="experience-item">
-                <h3>🏆 Certificate of Merit</h3>
-                <p class="dates">Institute of Cost Accountants of India - Issued Oct 2025</p>
-                <p><strong>Recognition:</strong> Consistency</p>
-            </div>
-            <div class="experience-item">
-                <h3>📊 SEBI Investor Awareness Certificate</h3>
-                <p class="dates">SEBI - Issued Oct 2025 · Expires Oct 2027</p>
-                <p><strong>Focus:</strong> Investment</p>
-            </div>
-            <div class="experience-item">
-                <h3>💼 SAP FICO</h3>
-                <p class="dates">Institute of Cost Accountants of India - Issued Sep 2023</p>
-            </div>
-        </section>
-
-        <section id="contact">
-            <h2>Get in Touch</h2>
-            <p>🤖 <strong>Basic AI Services</strong></p>
-            <p>Contact me for basic AI services consultation, including:</p>
-            <ul>
-                <li>Data Analysis Automation</li>
-                <li>Simple Chatbot Development</li>
-                <li>Workflow Optimization using Machine Learning tools</li>
-            </ul>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <strong>📧 Email</strong><br>
-                    <a href="mailto:narendrakumar39062@gmail.com">narendrakumar39062@gmail.com</a>
-                </div>
-                <div class="contact-item">
-                    <strong>📱 Phone</strong><br>
-                    <a href="tel:+919398587829">+91 9398587829</a>
-                </div>
-                <div class="contact-item">
-                    <strong>💼 LinkedIn</strong><br>
-                    <a href="https://www.linkedin.com/messaging/thread/new/?recipients=cma-narendra-kumar-596722287" target="_blank">Message on LinkedIn</a>
-                </div>
-                <div class="contact-item">
-                    <strong>📍 Location</strong><br>
-                    Nellore, Andhra Pradesh, India
-                </div>
-            </div>
-        </section>
-
-        <section style="background: #f0f0f0;">
-            <h2>Open to Opportunities</h2>
-            <p>✅ Available for immediate joining | Open to remote, hybrid, and on-site opportunities</p>
-            <div class="skills-grid">
-                <div class="skill">FP&A Analyst</div>
-                <div class="skill">AI Consultant</div>
-                <div class="skill">Cost Accountant</div>
-                <div class="skill">Fund Accountant</div>
-                <div class="skill">Financial Analyst</div>
-                <div class="skill">Accountant</div>
-            </div>
-        </section>
-    </div>
-
-    <footer>
-        <p>&copy; 2025 CMA Narendra Kumar. All rights reserved.</p>
-        <p>Designed with precision and passion for excellence.</p>
-    </footer>
-</body>
-</html>
